@@ -44,7 +44,6 @@ To view the ERD for this database design, please visit the [ERD Diagram](https:/
 7. **Testing, Logging, and Visualization**
    - Comprehensive tests are written for all endpoints.
    - Winston is used for logging functions and processes.
-   - (Optional) Additional points for building views (UI/UX) for better user interaction.
 
 ## Database
 

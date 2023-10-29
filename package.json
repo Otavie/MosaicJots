@@ -1,6 +1,9 @@
 {
   "name": "blog-api-design",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=15.0.0"
+  },
   "description": "API for blog with frontend that demonstrate its usage",
   "main": "index.js",
   "scripts": {

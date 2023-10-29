@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+        <title><%= title %></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+        <link rel="stylesheet" href="/stylesheets/app.css">
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <link rel="stylesheet" href="/stylesheets/login-signup.css">
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+        <link rel="stylesheet" href="/stylesheets/create.css">
+        <link rel="stylesheet" href="/stylesheets/blog.css">
+    </head>
+    <body>
+        <header id="header" class="header">
+            <nav class="navbar-custom">
+                <div class="logo-container">
+                    <a class="logo" href="/">
+                        <img src="/img/majo-logo.png" alt="Mosaic Jots Logo"><span class="mosaic-jots hide"><span style="color: #000000;">Mosaic</span> <span style="color: #029CDE">Jots</span></span>
+                    </a>
+                </div>
+
+                <div class="hamburger-container">
+                    <label class="hamburger">
+                        <span class="hamburger-lines"></span>
+                    </label>
+                </div>     
+
+                <div class="nav-links-container hide">
+                    <ul>
+
+                        <li class="filter-buttons-container">
+                            <div class="filter-buttons">
+                                <div class="select-filter-state">
+                                    <span style="font-weight: 500; z-index: 4;">Filter by:</span>
+                                </div>
+                                <div class="filter-options">
+                                    <a href="/dashboard?state=All" class="<%= selectedState === 'All' ? 'selected' : '' %>">All</a>
+                                    <a href="/dashboard?state=Draft" class="<%= selectedState === 'Draft' ? 'selected' : '' %>">Draft</a>
+                                    <a href="/dashboard?state=Published" class="<%= selectedState === 'Published' ? 'selected' : '' %>">Published</a>
+                                </div>
+                            </div>
+                        </li>       
+                        
+                        <% for (const link of links) { %>
+                            <li class="link-item-custom">
+                                <a style="padding: 0;" href="<%= link.url %>"><%= link.link_name %></a>
+                            </li>                            
+                        <% } %>
+
+                    </ul>
+
+                </div>    
+            </nav>
+        </header>
+
+        <div class="dashboard-container">
+
+            <div class="inner-dashboard-container">
+
+                <div class="dashboard-content">
+
+                    <% if (blogs && blogs.length > 0) { %>
+                        <% blogs.forEach((blog) => { %>
+                            <div class="dashboard-blog-container">
+                                <div class="dashboard-blog-head">
+                                    <h2><%= blog._doc.title %></h2>
+                                    <div class="action">
+                                        <a href="/dashboard/edit/<%= blog._doc._id %>"><i class="fa-solid fa-pen-to-square text-primary me-3"></i></a>
+                                        <a href="/dashboard/delete/<%= blog._doc._id %>"><i class="fa-solid fa-trash text-danger"></i></a>
+                                    </div>
+                                </div>
+                                <div class="dashboard-blog-body">
+                                    <p>
+                                        <%= blog._doc.description %>
+                                    </p>
+                                </div>
+                                <div class="dashboard-blog-footer">
+                                    <div class="dashboard-blog-state">
+                                        <p><%= blog._doc.state %></p>
+                                    </div>
+                                    <div class="dashboard-blog-author">
+                                        <p><%= blog._doc.author_fn %> <%= blog._doc.author_ln %></p>
+                                    </div>
+                                    <div class="dashboard-blog-tag">
+                                        <p><%= blog._doc.tag %></p>
+                                    </div>
+                                    <div class="dashboard-blog-date">
+                                        <p><%= blog.date %> <%= blog.time %></p>
+                                    </div>
+                                    <div class="dashboard-blog-read_time">
+                                        <p><%= blog._doc.reading_time %></p>
+                                    </div>
+                                    <div class="dashboard-blog-read-count">
+                                        <p><i class="fa-solid fa-book-open-reader"></i><span style="font-weight: 500;"> <%= blog._doc.read_count %></span></p>
+                                    </div>
+                                </div>
+                            </div>        
+                        <% }); %>
+                    <% } else { %>
+                        <div class="dashboard-blog-container">
+                            <p>No blog created yet!</p>
+                        </div>    
+                    <% } %>
+
+                </div>
+
+                <div class="pagination-container mt-5 text-center">
+                    <% if (page > 1) { %>
+                        <a class="btn btn-secondary px-5" href="/dashboard/?page=<%= page - 1 %>&state=<%= selectedState %>">Prev</a> 
+                    <% } %>
+                    
+                    <% if (page < totalPages) { %>
+                        <a class="btn btn-secondary px-5" href="/dashboard/?page=<%= page + 1 %>&state=<%= selectedState %>">Next</a>
+                    <% } %>
+                </div>
+
+            </div>
+        </div>
+
+    <%- include('partials/copy-right') %>
+    <script src="/js/filter-state.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+</html>

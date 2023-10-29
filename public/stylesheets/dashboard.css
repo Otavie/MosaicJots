@@ -1,0 +1,239 @@
+.filter-buttons-container {
+  margin-top: 0.5rem;
+  z-index: 3 !important;
+}
+
+.filter-buttons {
+  width: 120px;
+  cursor: pointer;
+  position: relative;
+  padding: 2px;
+}
+
+.select-filter-state::after {
+  content: '';
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: var(--black);
+  display: inline-block;
+  position: absolute;
+  right: 1rem;
+  margin-top: 0.5rem;
+  pointer-events: none;
+}
+
+.select-filter-state {
+  color: var(--black);
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-options {
+  padding: 0 1rem;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 0px !important;
+  overflow-y: hidden;
+  transition: 0.3s ease-in-out;
+  z-index: 3 !important;
+}
+
+.filter-options a {
+  font-size: 0.95rem !important;
+  color: var(--white) !important;
+  width: 100%;
+  display: block;
+  margin-bottom: 5px;
+  transition: 0.5s ease-in-out;
+  width: 100%;
+  font-weight: 400 !important;
+}
+
+.filter-options a:first-child {
+  margin-top: 10px;
+}
+
+.filter-options a:hover {
+  color: #c0c0c0;
+}
+
+.filter-options.active {
+  height: 140px !important;
+}
+
+.filter-options.active a.selected:hover {
+  color: #c0c0c0;
+}
+
+a.selected {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: var(--red);
+  padding-left: 10px;
+}
+
+.dashboard-container {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  padding-top: 100px;
+}
+
+.inner-dashboard-container {
+  width: 95%;
+  min-height: calc(100vh - 100px);
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+.dashboard-container .head {
+  height: 60px;
+  border: 1px solid var(--red);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-container .head h1 {
+  font-size: 1.75rem;
+  text-align: left;
+  width: 100%;
+  margin-top: -0.5rem;
+}
+
+.dashboard-container .head h4 {
+  font-size: 1.15rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: calc(100vh - 155px);
+}
+
+.dashboard-blog-container {
+  border: 1px solid var(--secondary-color);
+  margin-bottom: 1.5rem;
+  border-radius: 3px;
+  padding: 1rem 1rem 0;
+}
+
+.dashboard-blog-container:first-child {
+  margin-top: 2rem;
+}
+
+.dashboard-blog-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-blog-head h2 {
+  width: calc(100% - 35px);
+}
+
+.action {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-blog-head i {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-blog-head h2,
+.dashboard-blog-body p {
+  text-align: justify;
+}
+
+.dashboard-blog-head h2 {
+  text-align: left;
+}
+
+.dashboard-blog-footer {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 0.75rem;
+}
+
+.dashboard-blog-read-count,
+.dashboard-blog-read_time,
+.dashboard-blog-state,
+.dashboard-blog-author,
+.dashboard-blog-tag,
+.dashboard-blog-date {
+  min-width: 70px;
+  height: 30px;
+  border: 1px solid #6c757d;
+  color: var(--black);
+  line-height: 25px;
+  margin-bottom: 0.5rem;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+
+.dashboard-blog-read-count p,
+.dashboard-blog-read_time p,
+.dashboard-blog-state p,
+.dashboard-blog-author p,
+.dashboard-blog-tag p,
+.dashboard-blog-date p {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+@media only screen and (min-width: 650px) {
+  .inner-dashboard-container {
+    width: 85%;
+  }
+  .dashboard-blog-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .dashboard-blog-read-count,
+  .dashboard-blog-read_time,
+  .dashboard-blog-state,
+  .dashboard-blog-author,
+  .dashboard-blog-tag,
+  .dashboard-blog-date {
+    min-width: 70px;
+    height: 40px;
+    line-height: 35px;
+    margin-bottom: 0.75rem;
+    padding: 0px 10px;
+  }
+  .dashboard-blog-read-count p,
+  .dashboard-blog-read_time p,
+  .dashboard-blog-state p,
+  .dashboard-blog-author p,
+  .dashboard-blog-tag p,
+  .dashboard-blog-date p {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .dashboard-blog-head i {
+    font-size: 1.25rem;
+  }
+  .dashboard-blog-head h2 {
+    width: calc(100% - 80px);
+  }
+  .action {
+    width: 50px;
+    flex-direction: row;
+  }
+  .dashboard-blog-container {
+    padding: 1rem 2rem 0.5rem;
+  }
+}

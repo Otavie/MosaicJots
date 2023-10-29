@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+    <div class="index-container">
+        <div class="inner-index-container">
+            <div class="head">
+                <h1 class="text-center">Preview</h1>        
+            </div>
+    
+            <div class="index-contents">
+
+                <div class="blogs-container">
+                    <div class="latest-blog-container">
+                        <div class="latest-blog-hanger">
+                            <p>Preview Blog</p>
+                        </div>
+                    </div>
+
+                    <div class="blog-content">
+                        <div class="blog-content-head">
+                            <h2><%= blogTitle %></h2>
+                        </div>
+                        <div class="blog-details">
+                            <p>By: <%= author_fn %> <%= author_ln %></p>
+                            <div class="date-and-duration">
+                                <p><%= readingTime %> minute(s)</p>
+                            </div>
+                        </div>
+                        <div class="blog-content-paragraph">
+                            <p>
+                                <%= body %>
+                            </p>
+                        </div>    
+                    </div>
+        
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+<%- include('partials/copy-right') %>
+<%- include('partials/footer') %>

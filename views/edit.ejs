@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+
+<div class="create-container">
+    <div class="inner-create-container">
+        <div class="head">
+            <h1>Edit Blog</h1>
+        </div>
+
+        <div class="create-content">
+
+            <div class="row">
+                <div class="col-12">
+                    <form action="/dashboard/edit/<%= blog._doc._id %>" method="POST">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="<%= blog._doc.title %>"  required>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" required><%= blog._doc.description %></textarea>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Body</label>
+                            <textarea class="form-control" id="body" name="body" required><%= blog._doc.body %></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="author_fn" class="form-label">Author First Name</label>
+                                <input type="text" class="form-control" id="author_fn" name="author_fn" value="<%= blog._doc.author_fn %>" required>    
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="author_ln" class="form-label">Author Last Name</label>
+                                <input type="text" class="form-control" id="author_ln" name="author_ln" value="<%= blog._doc.author_ln %>" required>    
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="tag" class="form-label">Tag</label>
+                                <select class="form-select" id="tag" name="tag" required>
+                                    <option value="Business" <%= blog._doc.state === 'Business' ? 'selected' : '' %>>Business</option>
+                                    <option value="Education" <%= blog._doc.state === 'Education' ? 'selected' : '' %>>Education</option>
+                                    <option value="Health" <%= blog._doc.state === 'Health' ? 'selected' : '' %>>Health</option>
+                                    <option value="Politics" <%= blog._doc.state === 'Politics' ? 'selected' : '' %>>Politics</option>
+                                    <option value="Sports" <%= blog._doc.state === 'Sports' ? 'selected' : '' %>>Sports</option>
+                                    <option value="Music" <%= blog._doc.state === 'Music' ? 'selected' : '' %>>Music</option>
+                                    <option value="Entertainment" <%= blog._doc.state === 'Business' ? 'selected' : '' %>>Entertainment</option>
+                                    <option value="Fashion" <%= blog._doc.state === 'Entertainment' ? 'selected' : '' %>>Fashion</option>
+                                    <option value="Career" <%= blog._doc.state === 'Career' ? 'selected' : '' %>>Career</option>
+                                    <option value="Technology" <%= blog._doc.state === 'Technology' ? 'selected' : '' %>>Technology</option>
+                                    <option value="Nature" <%= blog._doc.state === 'Nature' ? 'selected' : '' %>>Nature</option>
+                                </select>
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="state" class="form-label">State</label>
+                                <select class="form-select" id="state" name="state" required>
+                                    <option value="Draft" <%= blog._doc.state === 'Draft' ? 'selected' : '' %>>Draft</option>
+                                    <option value="Published" <%= blog._doc.state === 'Published' ? 'selected' : '' %>>Published</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 button-group">
+                            <button type="submit" class="btn btn-primary btn-lg" name="action" value="save">Save Edited Blog</button>
+                            <!-- <a class="btn btn-primary btn-lg" href="/dashboard/preview">Preview Blog</a> -->
+                            <a href="/dashboard" class="btn btn-secondary px-5">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<%- include('partials/copy-right') %>
+<%- include('partials/signup-form') %>
+<%- include('partials/footer') %>

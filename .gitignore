@@ -1,0 +1,4 @@
+*.scss
+.env
+node_modules/
+*.log

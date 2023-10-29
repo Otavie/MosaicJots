@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+    <div class="blog-container">
+        <div class="inner-blog-container">
+
+            <div class="blog-content">
+                <div class="blog-content-head">
+                    <h2><%= blog._doc.title %></h2>
+                </div>
+                <div class="blog-details">
+                    <p>By: <%= blog._doc.author_fn %> <%= blog._doc.author_ln %></p>
+                    <div class="date-and-duration">
+                        <p><%= blog._doc.reading_time %></p> <p><%= formattedDate %></p>
+                    </div>
+                </div>
+                <div class="blog-content-paragraph">
+                    <p>
+                        <%= blog._doc.body %>
+                    </p>
+                </div>    
+            </div>
+        
+        </div>
+    </div>
+
+<%- include('partials/copy-right') %>
+<%- include('partials/footer') %>

@@ -1,0 +1,83 @@
+<%- include('partials/header') %>
+
+<div class="create-container">
+    <div class="inner-create-container">
+        <div class="head">
+            <h1>Create Blog</h1>
+        </div>
+
+        <div class="create-content">
+
+            <div class="row">
+                <div class="col-12">
+                    <form action="/dashboard/create" method="POST">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Body</label>
+                            <textarea class="form-control" id="body" name="body" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="author_fn" class="form-label">Author First Name</label>
+                                <input type="text" class="form-control" id="author_fn" name="author_fn" required>    
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="author_ln" class="form-label">Author Last Name</label>
+                                <input type="text" class="form-control" id="author_ln" name="author_ln" required>    
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label for="tag" class="form-label">Tag</label>
+                                <select class="form-select" id="tag" name="tag" required>
+                                    <option value="Business">Business</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Music">Music</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Career">Career</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Nature">Nature</option>
+                                </select>
+                            </div>
+                    
+                            <div class="mb-3">
+                                <label for="state" class="form-label">State</label>
+                                <select class="form-select" id="state" name="state" required>
+                                    <option value="Draft">Draft</option>
+                                    <option value="Published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="mb-3 button-group">
+                            <button type="submit" class="btn btn-primary btn-lg" name="action" value="save">Save</button>
+                            <!-- <a class="btn btn-primary btn-lg" href="/dashboard/preview">Preview Blog</a> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<%- include('partials/copy-right') %>
+<%- include('partials/signup-form') %>
+<%- include('partials/footer') %>

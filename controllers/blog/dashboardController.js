@@ -10,6 +10,9 @@ function getReadingTime(minutes) {
 async function getDashboard(req, res) {
     try {
         const email = req.session.email;
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+
         const user = await userModel.findOne({ email });
 
         if (!user) {
@@ -23,6 +26,24 @@ async function getDashboard(req, res) {
         const filterState = req.query.state || 'All';
 
         let totalBlogs, userBlogs;
+        userBlogs = await blogModel.find({ userId })
+
+        if (userBlogs.length === 0) {
+            return res.render('dashboard', {
+                title: 'Dashboard',
+                links:[
+                    { link_name: 'Create Blog', url: '/dashboard/create' },
+                    { link_name: 'Logout', url: '/logout' },
+                ],
+                message: { error: null },
+                blogs: userBlogs,
+                selectedState: {},
+                page: 1,
+                totalPages: 1,
+                req
+    
+            });
+        }
 
         if (filterState === 'All') {
             totalBlogs = await blogModel.countDocuments({ userId });
@@ -67,6 +88,63 @@ async function getDashboard(req, res) {
         res.status(500).json('Internal Server Error!');
     }
 }
+
+
+// async function getDashboard(req, res) {
+//     try {
+//         const email = req.session.email;
+//         const user = await userModel.findOne({ email });
+
+//         if (!user) {
+//             return res.status(404).json({ error: 'User Not Found Get Request!' });
+//         }
+
+//         const userId = user._id;
+//         const page = parseInt(req.query.page) || 1;
+//         const limit = 20;
+//         const skip = (page - 1) * limit;
+//         const filterState = req.query.state || 'All';
+
+//         const totalBlogs = filterState === 'All' ?
+//             await blogModel.countDocuments({ userId }) :
+//             await blogModel.countDocuments({ userId, state: filterState });
+
+//         const totalPages = Math.ceil(totalBlogs / limit);
+
+//         if (page > totalPages) {
+//             return res.redirect(`/dashboard/?page=${totalPages}&state=${filterState}`);
+//         }
+
+//         if (page < 1) {
+//             return res.redirect(`/dashboard/?page=1&state=${filterState}`);
+//         }
+
+//         const userBlogs = filterState === 'All' ?
+//             await blogModel.find({ userId }).limit(limit).skip(skip) :
+//             await blogModel.find({ userId, state: filterState }).limit(limit).skip(skip);
+
+//         const formattedBlogs = extractTimeAndDate(userBlogs);
+
+//         res.status(200).render('dashboard', {
+//             title: 'Dashboard',
+//             links: [
+//                 { link_name: 'Create Blog', url: '/dashboard/create' },
+//                 { link_name: 'Logout', url: '/logout' },
+//             ],
+//             message: { error: null },
+//             blogs: formattedBlogs,
+//             selectedState: filterState,
+//             page,
+//             totalPages,
+//             req
+//         });
+
+//     } catch (error) {
+//         logger.error('Error in getDashboard', error);
+//         res.status(500).json('Internal Server Error!');
+//     }
+// }
+
 
 async function postDashboard(req, res) {
     try {

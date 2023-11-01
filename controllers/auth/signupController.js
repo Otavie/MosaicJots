@@ -88,9 +88,9 @@ async function postSignup(req, res) {
         res.cookie('token', token, { httpOnly: true, maxAge: cookieAge });
 
         // Store the User's Details in the Session
-        req.session.email = user.email;
-        req.session.first_name = user.first_name;
-        req.session.last_name = user.last_name;
+        req.session.email = newUser.email;
+        req.session.first_name = newUser.first_name;
+        req.session.last_name = newUser.last_name;
 
         // Store Success Message in Session Variable and redirect to dashboard
         req.session.successMessage = 'User registered successfully!';

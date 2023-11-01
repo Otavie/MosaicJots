@@ -43,30 +43,9 @@ async function postLogin(req, res) {
 
         if (!user) {
             errors.email = 'Invalid email address';
-
-            return res.status(400).render('login', {
-                title: 'Login Error!',
-                links: navLinks,
-                email,
-                errors,
-                req
-            })
-        } 
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            errors.password = 'Password is wrong!';
-        }
-
-        // Store the User's Details in the Session
-        req.session.email = user.email;
-        req.session.firstName = user.first_name;
-        req.session.lastName = user.last_name;
-        
-        if (Object.keys(errors).length > 0) {
             res.status(400).render('login', {
                 title: 'Login Error!',
-                links: navLinks,
+                links: navLinks, 
                 email,
                 errors,
                 req
@@ -74,6 +53,38 @@ async function postLogin(req, res) {
             logger.warn('Login Error!', { email, errors });
             return;
         }
+
+        // Verify the Password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            errors.password = 'Password is wrong!';
+            res.status(400).render('login', {
+                title: 'Login Error!',
+                links: navLinks, 
+                email,
+                errors,
+                req
+            });
+            logger.warn('Login Error!', { email, errors });
+            return;
+        }
+
+        // Store the User's Details in the Session
+        req.session.email = user.email;
+        req.session.firstName = user.first_name;
+        req.session.lastName = user.last_name;
+        
+        // if (Object.keys(errors).length > 0) {
+        //     res.status(400).render('login', {
+        //         title: 'Login Error!',
+        //         links: navLinks,
+        //         email,
+        //         errors,
+        //         req
+        //     });
+        //     logger.warn('Login Error!', { email, errors });
+        //     return;
+        // }
 
         // Generate a JWT Token and Store it in a Secure HttpOnly Cookie
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, {expiresIn: tokenAge });
